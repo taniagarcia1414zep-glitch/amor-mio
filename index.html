@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Te Amo Amor</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, #ff4e50, #1a1a1a);
+    font-family: 'Arial', sans-serif;
+}
+
+/* CONTENEDOR */
+.contenedor {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* CORAZÓN GRANDE */
+.corazon {
+    width: 130px;
+    height: 130px;
+    background: #ff0000;
+    position: relative;
+    transform: rotate(-45deg);
+    margin: auto;
+    animation: latido 1s infinite;
+}
+
+.corazon::before,
+.corazon::after {
+    content: "";
+    width: 130px;
+    height: 130px;
+    background: #ff0000;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.corazon::before {
+    top: -65px;
+    left: 0;
+}
+
+.corazon::after {
+    left: 65px;
+    top: 0;
+}
+
+@keyframes latido {
+    0%,100% { transform: scale(1) rotate(-45deg); }
+    50% { transform: scale(1.25) rotate(-45deg); }
+}
+
+/* TEXTO BONITO */
+.texto {
+    margin-top: 40px;
+    font-size: 3em;
+    color: #fff;
+    opacity: 0;
+    animation: aparecer 3s forwards;
+    text-shadow: 0 0 20px #ff0000, 0 0 40px #ff4e50;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* SPIDERMAN (estilo simple) */
+.spiderman {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    animation: balanceo 3s ease-in-out infinite;
+}
+
+/* cuerda */
+.spiderman::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 150px;
+    background: white;
+    top: -150px;
+    left: 50%;
+}
+
+/* balanceo */
+@keyframes balanceo {
+    0% { transform: translateX(-50%) rotate(-15deg);}
+    50% { transform: translateX(-50%) rotate(15deg);}
+    100% { transform: translateX(-50%) rotate(-15deg);}
+}
+
+/* CORAZONES FLOTANDO */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: flotar 6s linear infinite;
+}
+
+@keyframes flotar {
+    0% { transform: translateY(100vh); opacity: 1;}
+    100% { transform: translateY(-10vh); opacity: 0;}
+}
+
+/* LUCES */
+.luz {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    animation: brillo 2s infinite alternate;
+}
+
+@keyframes brillo {
+    from { opacity: 0.2;}
+    to { opacity: 1;}
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- Spiderman estilo emoji -->
+    <div class="spiderman">🕷️🕸️</div>
+
+    <div class="corazon"></div>
+    <div class="texto">Te amo amor ❤️</div>
+
+</div>
+
+<script>
+
+// corazones flotando
+function crearCorazon() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(crearCorazon, 300);
+
+
+// luces de fondo
+function crearLuz() {
+    const luz = document.createElement("div");
+    luz.className = "luz";
+    luz.style.left = Math.random() * 100 + "vw";
+    luz.style.top = Math.random() * 100 + "vh";
+    document.body.appendChild(luz);
+
+    setTimeout(() => luz.remove(), 2000);
+}
+setInterval(crearLuz, 200);
+
+</script>
+
+</body>
+</html>
